@@ -15,6 +15,7 @@ disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
 disp.begin()
 
 to_skip = 0
+success = 1
 
 while success:
     start_time = time.time();
@@ -26,9 +27,9 @@ while success:
        continue
 
     cv2im = cv2.cvtColor(cv2im, cv2.COLOR_BGR2RGB)
-    image = Image.fromarray(cv2_im).convert('1')
+    image = Image.fromarray(cv2im).convert('1')
     disp.image(image)
     disp.display()
     elapsed = time.time() - start_time
-    time.sleep(max(0, (1/30) - elapsed))
-    to_skip += max(elapsed - (1/30), 0) * 30
+    time.sleep(max(0, (1./30) - elapsed))
+    to_skip += max(elapsed - (1./30), 0) * 30
